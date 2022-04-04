@@ -176,7 +176,7 @@ add_filter('the_generator', 'wpb_remove_version');
  *
  * @return void
  */
-function underboot_enqueue_vendor () {
+function scaffold_s_bootstrap_vendor () {
     # https://developer.wordpress.org/reference/functions/wp_enqueue_style/
     # wp_enqueue_style( string $handle, string $src = '', string[] $deps = array(), string|bool|null $ver = false, string $media = 'all' )
     # Enqueue a CSS stylesheet.
@@ -187,7 +187,20 @@ function underboot_enqueue_vendor () {
     # Fires when scripts and styles are enqueued.
     wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/node_modules/bootstrap/dist/js/bootstrap.min.js', [], false, true);
 }
-add_action( 'wp_enqueue_scripts', 'underboot_enqueue_vendor', 12 );
+add_action( 'wp_enqueue_scripts', 'scaffold_s_bootstrap_vendor', 12 );
+
+/**
+ * Edit comment form fields
+ *
+ * @return void
+ */
+function scaffold_s_bootstrap_comment_fields ( $fields ) {
+	# https://developer.wordpress.org/reference/hooks/comment_form_default_fields/
+	# apply_filters( 'comment_form_default_fields', string[] $fields )
+	# Filters the default comment form fields.
+
+}
+add_filter( 'comment_form_default_fields', 'scaffold_s_bootstrap_comment_fields' );
 
 /**
  * https://www.youtube.com/watch?v=0q7oxrq1isI
