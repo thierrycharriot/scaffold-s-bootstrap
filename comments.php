@@ -76,7 +76,11 @@ if ( post_password_required() ) {
 		<?php
 	endif; // Check for have_comments().
 
+	?>
+	<div class="card-body">
+	<?php
 	comment_form();
 	?>
+	</div><!--/card-body-->
 
 </div><!-- #comments -->

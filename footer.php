@@ -49,21 +49,20 @@
 <?php wp_footer(); ?>
 
 <script>      
-window.onscroll = function () {
-afficherBouton()
-};
+	window.onscroll = function () {
+		afficherBouton()
+	};
 
-function afficherBouton() {
-	
-	var elem = document.getElementById('bouton-remonter');
-	var nombrePixels = window.pageYOffset | document.body.scrollTop;
-	
-	if (nombrePixels > 360) {
-		elem.style.display = 'block';
-	} else if (nombrePixels <= 360) {
-		elem.style.display = 'none';
+	function afficherBouton() {	
+		let elem = document.getElementById( 'bouton-remonter' );
+		let nombrePixels = window.pageYOffset | document.body.scrollTop;
+		
+		if ( nombrePixels > 360 ) {
+			elem.style.display = 'block';
+		} else if ( nombrePixels <= 360 ) {
+			elem.style.display = 'none';
+		}
 	}
-}
 </script>
 
 </body>

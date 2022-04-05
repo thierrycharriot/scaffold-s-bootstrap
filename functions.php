@@ -176,7 +176,7 @@ add_filter('the_generator', 'wpb_remove_version');
  *
  * @return void
  */
-function scaffold_s_bootstrap_vendor () {
+function scaffold_s_bootstrap_node_modules () {
     # https://developer.wordpress.org/reference/functions/wp_enqueue_style/
     # wp_enqueue_style( string $handle, string $src = '', string[] $deps = array(), string|bool|null $ver = false, string $media = 'all' )
     # Enqueue a CSS stylesheet.
@@ -187,10 +187,23 @@ function scaffold_s_bootstrap_vendor () {
     # Fires when scripts and styles are enqueued.
     wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/node_modules/bootstrap/dist/js/bootstrap.min.js', [], false, true);
 }
-add_action( 'wp_enqueue_scripts', 'scaffold_s_bootstrap_vendor', 12 );
+add_action( 'wp_enqueue_scripts', 'scaffold_s_bootstrap_node_modules', 12 );
+
+/**
+ * Register Custom Navigation Walker
+ * 
+ * @return void
+ *
+ */
+function register_navwalker(){
+	require_once get_template_directory() . '/class-wp-bootstrap-navwalker.php';
+}
+add_action( 'after_setup_theme', 'register_navwalker' );
 
 /**
  * Edit comment form fields
+ * 
+ * https://www.youtube.com/watch?v=r1pZElaM9cc
  *
  * @return void
  */
@@ -198,7 +211,11 @@ function scaffold_s_bootstrap_comment_fields ( $fields ) {
 	# https://developer.wordpress.org/reference/hooks/comment_form_default_fields/
 	# apply_filters( 'comment_form_default_fields', string[] $fields )
 	# Filters the default comment form fields.
-
+	#var_dump($fields);
+	$fields['author'] = '<div class="form-group mb-3"><label for="author">Auteur</label><input type="text" class="form-control" name="author"></div>';
+	$fields['email'] = '<div class="form-group mb-3"><label for="email">Email</label><input type="email" class="form-control" name="email"></div>';
+	$fields['url'] = '<div class="form-group mb-3"><label for="url">Site Web</label><input type="url" class="form-control" name="url"></div>';
+	return($fields);
 }
 add_filter( 'comment_form_default_fields', 'scaffold_s_bootstrap_comment_fields' );
 
@@ -209,20 +226,20 @@ add_filter( 'comment_form_default_fields', 'scaffold_s_bootstrap_comment_fields'
  * @return void
  */
 function scaffold_s_pagination () {
-	$pages = paginate_links(['type' => 'array']);
+	$pages = paginate_links( ['type' => 'array'] );
 	if ( $pages === null ) {
 		return;
 	};
 	echo '<nav aria-label="Pagination" class="m-3">';
 	echo '<ul class="pagination">';
 	foreach ( $pages as $page )  {
-		$active = strpos($page, 'current') !== false;
+		$active = strpos( $page, 'current' ) !== false;
 		$class = 'page-item';
-		if ($active) {
+		if ( $active ) {
 			$class .= ' active';
 		};
 		echo '<li class="' . $class . '">';
-		echo str_replace('page-numbers', 'page-link', $page);
+		echo str_replace('page-numbers', 'page-link', $page );
 		echo '</li>';
 	};
 	#var_dump( $pages );
