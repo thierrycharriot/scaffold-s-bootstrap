@@ -12,7 +12,7 @@ get_header();
 
 <div class="row">
 
-	<main id="primary" class="site-main col-9">
+	<main id="primary" class="site-main col-8">
 
 		<?php if ( have_posts() ) : ?>
 
