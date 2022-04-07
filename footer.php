@@ -34,9 +34,13 @@
 			</div><!-- .site-info -->
 
 			<div class="col-4">
-				<?php if ( ! is_active_sidebar( 'sidebar-2' ) ) {
-						return;
-					}
+				<?php 
+					# https://developer.wordpress.org/reference/functions/is_active_sidebar/
+					# is_active_sidebar( string|int $index )
+					# Determines whether a sidebar contains widgets.
+					if( ! is_active_sidebar( 'sidebar-2' ) ) {
+						#return;
+					} 
 					dynamic_sidebar( 'sidebar-2' );
 				?>
 			</div><!--/col-4-->

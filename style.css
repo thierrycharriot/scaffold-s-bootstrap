@@ -96,7 +96,6 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 --------------------------------------------- */
 
 .site-footer {
-	line-height: 60px;
 	padding: 2.4rem 0;
 }
 .site-footer .site-info {
@@ -134,6 +133,10 @@ textarea {
 	width: 100%;
 }
 
+.wp-block-search__label {
+    display: none;
+}
+
 /*--------------------------------------------------------------
 # Layouts
 --------------------------------------------------------------*/
@@ -154,8 +157,17 @@ textarea {
 /* Widgets
 --------------------------------------------- */
 
+aside ul {
+	list-style: none;
+}
+
 /* Media
 --------------------------------------------- */
+
+.post-thumbnail img {
+	max-width: 100%;
+	margin-bottom: 3rem;
+}
 
 /* Captions
 --------------------------------------------- */

@@ -119,12 +119,15 @@ add_action( 'after_setup_theme', 'scaffold_s_bootstrap_content_width', 0 );
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
-function s_bootstrap_widgets_init() {
+function scaffold_s_bootstrap_widgets_init() {
+	# https://developer.wordpress.org/reference/functions/register_sidebar/
+	# register_sidebar( array|string $args = array() )
+	# Builds the definition for a single sidebar and returns the ID.
 	register_sidebar(
 		array(
-			'name'          => esc_html__( 'Sidebar aside', 's_bootstrap' ),
+			'name'          => esc_html__( 'Sidebar aside', 'scaffold_s_bootstrap' ),
 			'id'            => 'sidebar-1',
-			'description'   => esc_html__( 'Add widgets here.', 's_bootstrap' ),
+			'description'   => esc_html__( 'Add widgets here.', 'scaffold_s_bootstrap' ),
 			'before_widget' => '<div class="card m-3"><section id="%1$s" class="widget %2$s"><div class="card-header">',
 			'after_widget'  => '</div></section></div>',
 			'before_title'  => '<h3 class="widget-title">',
@@ -133,9 +136,9 @@ function s_bootstrap_widgets_init() {
 	);
 	register_sidebar(
 		array(
-			'name'          => esc_html__( 'Sidebar footer', 's_bootstrap' ),
+			'name'          => esc_html__( 'Sidebar footer', 'scaffold_s_bootstrap' ),
 			'id'            => 'sidebar-2',
-			'description'   => esc_html__( 'Add widgets here.', 's_bootstrap' ),
+			'description'   => esc_html__( 'Add widgets here.', 'scaffold_s_bootstrap' ),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
 			'after_widget'  => '</section>',
 			'before_title'  => '<h6 class="widget-title">',
@@ -143,7 +146,7 @@ function s_bootstrap_widgets_init() {
 		)
 	);
 }
-add_action( 'widgets_init', 's_bootstrap_widgets_init' );
+add_action( 'widgets_init', 'scaffold_s_bootstrap_widgets_init' );
 
 /**
  * Enqueue scripts and styles.
@@ -161,6 +164,26 @@ function scaffold_s_bootstrap_scripts() {
 add_action( 'wp_enqueue_scripts', 'scaffold_s_bootstrap_scripts' );
 
 /**
+ * Add bootstrap
+ *
+ * @return void
+ */
+function scaffold_s_bootstrap_node_modules () {
+    # https://developer.wordpress.org/reference/functions/wp_enqueue_style/
+    # wp_enqueue_style( string $handle, string $src = '', string[] $deps = array(), string|bool|null $ver = false, string $media = 'all' )
+    # Enqueue a CSS stylesheet.
+    wp_enqueue_style('boostrap-css', get_stylesheet_directory_uri() . '/node_modules/bootstrap/dist/css/bootstrap.min.css', []);
+	wp_enqueue_style('boostrap-css-map', get_stylesheet_directory_uri() . '/node_modules/bootstrap/dist/css/bootstrap.css.map', []);  
+
+    # https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
+    # do_action( 'wp_enqueue_scripts' )
+    # Fires when scripts and styles are enqueued.
+    wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/node_modules/bootstrap/dist/js/bootstrap.min.js', [], false, true);
+	wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/node_modules/bootstrap/dist/js/bootstrap.min.js.map', [], false, true);
+}
+add_action( 'wp_enqueue_scripts', 'scaffold_s_bootstrap_node_modules', 12 );
+
+/**
  * https://www.wpbeginner.com/wp-tutorials/25-extremely-useful-tricks-for-the-wordpress-functions-file/
  * Hidden WordPress version 
  * 
@@ -170,24 +193,6 @@ function wpb_remove_version() {
 	return '';
 }
 add_filter('the_generator', 'wpb_remove_version');
-
-/**
- * Add bootstrap
- *
- * @return void
- */
-function scaffold_s_bootstrap_node_modules () {
-    # https://developer.wordpress.org/reference/functions/wp_enqueue_style/
-    # wp_enqueue_style( string $handle, string $src = '', string[] $deps = array(), string|bool|null $ver = false, string $media = 'all' )
-    # Enqueue a CSS stylesheet.
-    wp_enqueue_style('boostrap-css', get_stylesheet_directory_uri() . '/node_modules/bootstrap/dist/css/bootstrap.min.css', []); 
-
-    # https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
-    # do_action( 'wp_enqueue_scripts' )
-    # Fires when scripts and styles are enqueued.
-    wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/node_modules/bootstrap/dist/js/bootstrap.min.js', [], false, true);
-}
-add_action( 'wp_enqueue_scripts', 'scaffold_s_bootstrap_node_modules', 12 );
 
 /**
  * Register Custom Navigation Walker
