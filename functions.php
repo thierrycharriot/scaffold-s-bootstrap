@@ -173,13 +173,13 @@ function scaffold_s_bootstrap_node_modules () {
     # wp_enqueue_style( string $handle, string $src = '', string[] $deps = array(), string|bool|null $ver = false, string $media = 'all' )
     # Enqueue a CSS stylesheet.
     wp_enqueue_style('boostrap-css', get_stylesheet_directory_uri() . '/node_modules/bootstrap/dist/css/bootstrap.min.css', []);
-	wp_enqueue_style('boostrap-css-map', get_stylesheet_directory_uri() . '/node_modules/bootstrap/dist/css/bootstrap.css.map', []);  
+	#wp_enqueue_style('boostrap-css-map', get_stylesheet_directory_uri() . '/node_modules/bootstrap/dist/css/bootstrap.css.map', []);  
 
     # https://developer.wordpress.org/reference/hooks/wp_enqueue_scripts/
     # do_action( 'wp_enqueue_scripts' )
     # Fires when scripts and styles are enqueued.
     wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/node_modules/bootstrap/dist/js/bootstrap.min.js', [], false, true);
-	wp_enqueue_script('bootstrap-js', get_template_directory_uri() . '/node_modules/bootstrap/dist/js/bootstrap.min.js.map', [], false, true);
+	#wp_enqueue_script('bootstrap-js-map', get_template_directory_uri() . '/node_modules/bootstrap/dist/js/bootstrap.min.js.map', [], false, true);
 }
 add_action( 'wp_enqueue_scripts', 'scaffold_s_bootstrap_node_modules', 12 );
 

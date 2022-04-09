@@ -29,7 +29,7 @@
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 
-	<?php scaffold_s_bootstrap_post_thumbnail(); ?>
+	<?php scaffold_s_bootstrap_post_thumbnail('post-thumbnail', ['class' => 'card-img-top', 'alt' => '', 'style' => 'height: auto;']); ?>
 
 	<div class="card-body">
 
