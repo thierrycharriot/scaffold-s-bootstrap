@@ -12,7 +12,7 @@ get_header();
 
 <div class="row">
 
-	<main id="primary" class="site-main col-8">
+	<main id="primary" class="site-main col-lg-8">
 
 		<?php
 		while ( have_posts() ) :

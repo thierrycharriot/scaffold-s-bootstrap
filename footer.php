@@ -19,7 +19,7 @@
 	<div class="container">
 		<div class="row">
 
-			<div class="site-info col-8">
+			<div class="site-info col-lg-8">
 				<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'scaffold-s-bootstrap' ) ); ?>">
 					<?php
 					/* translators: %s: CMS name, i.e. WordPress. */
@@ -33,7 +33,7 @@
 					?>
 			</div><!-- .site-info -->
 
-			<div class="col-4">
+			<div class="col-lg-4">
 				<?php 
 					# https://developer.wordpress.org/reference/functions/is_active_sidebar/
 					# is_active_sidebar( string|int $index )
